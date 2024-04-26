@@ -1,0 +1,2 @@
+POST http://localhost:3334/buscar-placa?modelo=24lsfgh45&marca=sansung
+
