@@ -5,8 +5,8 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/server/app.js ",
-    "test": "node --watch src/server/app.js"
+    "dev": "nodemon src/app.js ",
+    "test": "node --watch src/app.js"
   },
   "keywords": [],
   "author": "",

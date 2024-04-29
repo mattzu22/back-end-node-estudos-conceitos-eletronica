@@ -1,3 +1,10 @@
 {"id":"970305d8-916e-42e0-a52c-945484797d72","modelo":"34asdasdj","marca":"sony"}
 {"id":"ac0bd35c-9867-4931-a0fd-dd7808631759","modelo":"34asdaset","marca":"sony"}
 {"id":"b18d6eb3-5d59-4a16-9a87-712d093d8a5c","modelo":"24lsfgh45","marca":"aoc"}
+{"id":"de504c5c-4834-4bda-a0a6-0889ff59801e","modelo":"34lgthdrf","marca":"aoc"}
+{"id":"64653906-b6e5-4345-ae22-0ebbc79abe0f","modelo":"24lgt345ad","marca":"sansung ","peca":"Placa principal"}
+{"id":"e0b9964e-cac5-4cc3-a9ef-beea4f0fbe3f","modelo":"43sp65ghty","marca":"sony","peca":"Tela"}
+{"id":"79980dd0-ea23-4e6e-9e56-84c0913805b6","modelo":"23amsdjas","marca":"sansung","peca":"tela"}
+{"id":"ef0ae1ba-9082-4cc3-b5a9-f2bd222759fd","modelo":"32sesdsf","marca":"lg","peca":"placa font"}
+{"id":"a199f32b-d41a-4887-84f3-5140967778ec","modelo":"asdasd","marca":"asdasd","peca":"asdasd"}
+{"id":"1552e2d4-0b60-4856-993a-937a4fa7de98","modelo":"34asdfaljg","marca":"sansung","peca":"placaprincipal"}
