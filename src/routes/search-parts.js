@@ -23,6 +23,5 @@ export async function searchParts(app){
       
           return reply.send(placaFiltrada);
         });
-      });
-      
+      });  
 }

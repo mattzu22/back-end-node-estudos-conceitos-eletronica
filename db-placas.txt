@@ -8,3 +8,4 @@
 {"id":"ef0ae1ba-9082-4cc3-b5a9-f2bd222759fd","modelo":"32sesdsf","marca":"lg","peca":"placa font"}
 {"id":"a199f32b-d41a-4887-84f3-5140967778ec","modelo":"asdasd","marca":"asdasd","peca":"asdasd"}
 {"id":"1552e2d4-0b60-4856-993a-937a4fa7de98","modelo":"34asdfaljg","marca":"sansung","peca":"placaprincipal"}
+{"id":"bf478e63-6ffa-4c49-b432-79bf2f1379f9","modelo":"sasung","marca":"12312edsdg","peca":"placa"}

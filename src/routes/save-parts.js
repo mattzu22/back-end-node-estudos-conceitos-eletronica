@@ -1,49 +1,36 @@
-import { appendFile } from "fs";
-import { randomUUID } from "crypto";
-import { readFile } from "fs";
+import { prisma } from "../lib/prisma.js";
+import { AppError } from "../utils/AppError.js";
 
-export async function saveParts(app){
-    app.post("/save-parts", (request, reply) => {
-        const { modelo, marca, peca } = request.query;
-      
-        if (!modelo || !marca || !peca === "") {
-          return reply.send("Preencha os campos.");
-        }
-      
-        readFile("db-placas.txt", "utf-8", (err, data) => {
-          const linhas = data.trim().split("\n");
-      
-          const modeloExistente = linhas.some((linha) => {
-            const registro = JSON.parse(linha);
-            return registro.modelo === modelo;
-          });
-      
-          if (modeloExistente) {
-            return reply.status(400).send("Modelo já cadastrado!");
-          }
-      
-          const id = randomUUID();
-      
-          const novoRegistro = {
-            id,
-            modelo,
-            marca,
-            peca,
-          };
-      
-          const novoRegistroJson = JSON.stringify(novoRegistro) + "\n";
-      
-          appendFile(
-            "db-placas.txt",
-            novoRegistroJson,
-            {
-              encoding: "utf-8",
-            },
-            (err) => {
-              return reply.status(500).send(`Erro ${err} ao salvar o arquivo`);
-            }
-          );
-          reply.status(201).send("Salvo com sucesso!");
-        });
-      });
+export async function savePart(app) {
+  app.post("/save-part", async (request, reply) => {
+    const { model, brand, type, state, amount } = request.body;
+
+    if (!model || !brand || !type || !state) {
+      throw new AppError("Preencha os campos.");
+    }
+
+    const existingModel = await prisma.part.findFirst({
+      where: {
+        model: model,
+      },
+    });
+
+    if (existingModel) {
+      throw new AppError("Modelo já cadastrado.");
+    }
+
+    const part = await prisma.part.create({
+      data: {
+        model,
+        brand,
+        type,
+        state,
+        amount,
+      },
+    });
+
+    return reply
+      .status(201)
+      .send({ message: "Peça salva com sucesso!", partId: part.id });
+  });
 }

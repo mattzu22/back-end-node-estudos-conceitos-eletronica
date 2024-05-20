@@ -6,19 +6,23 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon src/app.js ",
-    "test": "node --watch src/app.js"
+    "test": "node --watch src/app.js",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@fastify/cors": "^9.0.1",
+    "@prisma/client": "^5.14.0",
     "fastify": "^4.26.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "prisma": "^5.14.0"
   }
 }
