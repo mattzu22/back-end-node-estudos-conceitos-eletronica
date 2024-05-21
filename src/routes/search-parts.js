@@ -1,27 +1,35 @@
-import { readFile } from "fs";
+import { prisma } from "../lib/prisma.js";
+import { AppError } from "../utils/AppError.js";
 
-export async function searchParts(app){
-    app.get("/search-parts", (request, reply) => {
-        const { modelo, marca } = request.query;
-      
-        readFile("db-placas.txt", "utf-8", (err, data) => {
-          const registros = data.split("\n");
-      
-          if (registros[registros.length - 1] === "") {
-            registros.pop();
-          }
-      
-          const placaJson = registros.map((placa) => JSON.parse(placa));
-      
-          const placaFiltrada = placaJson.filter(
-            (placa) => placa.modelo === modelo || placa.marca === marca
-          );
-      
-          if (!placaFiltrada) {
-            return reply.status(401).send("Nem uma placa encontrada.");
-          }
-      
-          return reply.send(placaFiltrada);
-        });
-      });  
+export async function searchParts(app) {
+  app.get("/search-parts", async (request, reply) => {
+    const { brand, model } = request.query;
+
+    if (brand | (model === undefined)) {
+      throw new AppError("Preencha os campos.");
+    }
+
+    const parts = await prisma.part.findMany({
+      select: {
+        model: true,
+        state: true,
+        brand: true,
+        quantity: true,
+        type: true,
+      },
+      where: {
+        brand,
+        model,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    if (parts.length === 0) {
+      throw new AppError("Peça não encontrada.", 404);
+    }
+
+    return reply.send(parts);
+  });
 }
