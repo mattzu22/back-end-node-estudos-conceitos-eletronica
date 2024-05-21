@@ -9,11 +9,11 @@ datasource db {
 
 model Part {
   id        String   @id @default(uuid())
-  model     String   
+  model     String
   brand     String
   type      String
-  state     Boolean?
-  qauntity    Int?
+  state     String?
+  quantity  Int?
   createdAt DateTime @default(now())
 
   @@map("parts")
