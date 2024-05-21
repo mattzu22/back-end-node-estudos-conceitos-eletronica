@@ -1,7 +1,7 @@
 import fastify from "fastify";
 import fastifyCors from "@fastify/cors";
 
-import { savePart } from "./routes/save-parts.js";
+import { savePart } from "./routes/save-part.js";
 import { listParts } from "./routes/list-parts.js";
 import { searchParts } from "./routes/search-parts.js";
 import { deletaPart } from "./routes/delete-part.js";
