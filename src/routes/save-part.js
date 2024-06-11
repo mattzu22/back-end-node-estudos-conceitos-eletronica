@@ -3,7 +3,10 @@ import { AppError } from "../utils/AppError.js";
 
 export async function savePart(app) {
   app.post("/save-part", async (request, reply) => {
-    const { brand, model, type, state = "Não definido", quantity = 1} = request.body;
+    let { brand, model, type, state, quantity} = request.body;
+
+    state = state || "Não definido";
+    quantity = quantity || 1;
 
     if (!model || !brand || !type ) {
       throw new AppError("Preencha os campos.");
@@ -29,8 +32,8 @@ export async function savePart(app) {
 
     const part = await prisma.part.create({
       data: {
-        model,
         brand,
+        model,
         type,
         state,
         quantity,
