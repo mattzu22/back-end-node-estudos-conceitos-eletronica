@@ -1,0 +1,9 @@
+@baseUrl = http://localhost:3334
+
+PATCH {{baseUrl}}/parts
+Content-Type: application/json
+
+{
+    "id": "0237f373-dbcb-4b54-8a59-1f1bd1f6ea0c"
+}
+
