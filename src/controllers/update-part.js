@@ -6,7 +6,9 @@ export async function updatePart(request, reply) {
     
     const partsService = new PartsService();
 
-    if (!brand && !model && !type && !state && !quantity){
+    let variableQuantity = quantity || 0;
+
+    if (!brand && !model && !type && !state && !variableQuantity){
         throw new AppError("Pelo menos um campo deve ser preenchido para atualizar.", 400);
       }
 
@@ -14,12 +16,15 @@ export async function updatePart(request, reply) {
       throw new AppError("Os campos podem ter no máximo 50 caracteres.", 400);
     }
 
-    if (typeof quantity !== "number" && typeof quantity !== "undefined") {
+    if (typeof variableQuantity !== "number" && typeof variableQuantity !== "undefined") {
       throw new AppError("O campo precisa ser um valor válido.", 400);
     }
 
     try {
-      const partUpdated = await partsService.updated(brand, model, type, state, quantity, id)
+      const quantityNow = await partsService.findQuantityById(id);
+      let newQuantity = quantityNow.quantity + variableQuantity;
+
+      const partUpdated = await partsService.updated(brand, model, type, state, newQuantity, id)
 
       return reply.send({ message: "Peça atualizada!", partUpdated });
     } catch (error) {
