@@ -6,7 +6,6 @@ export async function savePart(request, reply) {
 
     const partsService = new PartsService();
 
-
     state = state || "Não definido";
     quantity = quantity || 1;
 
@@ -22,10 +21,10 @@ export async function savePart(request, reply) {
       throw new AppError("O campo precisa ser um valor válido.")
     }
 
-    const existingModel = await partsService.findModel(model);
-
-    if (existingModel) {
-      throw new AppError("Modelo já cadastrado.");
+    const existinModelAndType = await partsService.findTypeAndModel(type, model);
+    
+    if (existinModelAndType) {
+      throw new AppError("Tipo e modelo já cadastrado.");
     }
 
     const part = await partsService.create(brand, model, type, state, quantity)
