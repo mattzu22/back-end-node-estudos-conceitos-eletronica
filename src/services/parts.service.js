@@ -27,15 +27,28 @@ export class PartsService {
           });
     }
 
-    async findModel(model){
-        return await prisma.part.findFirst({
-            where: {
-              model,
-            },
+    async findQuantityById(id){
+        return await prisma.part.findUnique({
+          where: {
+            id,
+          },
+          select: {
+            quantity: true,
+          }
           });
     }
 
-    async findMany(brand, model) {
+    async findTypeAndModel(type, model){
+      return await prisma.part.findFirst({
+          where: {
+            type,
+            model
+          },
+        });
+  }
+
+
+    async findMany(brand, model, type) {
         return await prisma.part.findMany({
             select: {
               model: true,
@@ -47,6 +60,7 @@ export class PartsService {
             where: {
               brand: { contains: brand },
               model: { contains: model },
+              type: { contains: type },
             },
             orderBy: {
               createdAt: "desc",

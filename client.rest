@@ -1,9 +1,40 @@
 @baseUrl = http://localhost:3334
 
+
+###CRIAR UMA PEÇA
+POST {{baseUrl}}/parts
+Content-Type: application/json
+
+{   
+    "brand":"lg",
+    "model":"lga120003456",
+    "type": "tela",
+    "state": "defeituoso",
+    "quantity": 5
+}
+
+###ATUALIZAR UMA PEÇA
 PATCH {{baseUrl}}/parts
 Content-Type: application/json
 
-{
-    "id": "0237f373-dbcb-4b54-8a59-1f1bd1f6ea0c"
+{   
+    "id": "2e2aa24f-a072-42d3-bb35-26557dc69d03",
+    "brand":"lg",
+    "model":"lga12000345",
+    "type": "lga1200ghta",
+    "state": "defeituoso",
+    "quantity": 2
 }
+
+###DELETAR UMA PEÇA
+DELETE {{baseUrl}}/parts/0237f373-dbcb-4b54-8a59-1f1bd1f6ea0c
+
+
+###LiISTAR TODAS AS PEÇAS
+GET {{baseUrl}}/parts/list-parts
+
+###PROCURAR UMA PEÇA
+GET {{baseUrl}}/parts/search?model=lga12000345
+
+
 
