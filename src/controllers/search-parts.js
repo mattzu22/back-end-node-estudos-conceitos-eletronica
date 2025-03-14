@@ -3,18 +3,18 @@ import { PartsService } from "../services/parts.service.js";
 import { AppError } from "../utils/AppError.js";
 
 export async function searchParts(request, reply) {
-    const { brand, model } = request.query;
+    const { brand, model, type } = request.query;
 
     const partsService = new PartsService();
 
-    if (!brand && !model) {
+    if (!brand && !model && !type) {
       return reply
         .status(400)
         .send(new AppError("Preencha pelo menos um campo.", 400));
     }
 
     try {
-      const parts = await partsService.findMany(brand, model)
+      const parts = await partsService.findMany(brand, model, type)
 
       if (parts.length === 0) {
         return reply
